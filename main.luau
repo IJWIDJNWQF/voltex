@@ -1,4 +1,12 @@
 -- #matpatz
+-- 05 April 2026 Roblox Emergency Patch: HttpGet removed from DataModel
+local HttpService = game:GetService("HttpService")
+if not game.HttpGet then
+    getmetatable(game).__index.HttpGet = function(_, url)
+        return HttpService:GetAsync(url)
+    end
+    getmetatable(game).__index.HttpGetAsync = getmetatable(game).__index.HttpGet
+end
 
 --  as of 3/23 I will be citing the sources used for implementation of provided functions
     --[[
